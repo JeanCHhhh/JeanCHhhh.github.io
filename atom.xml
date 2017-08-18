@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="JeanCHhhh.github.io/"/>
-  <updated>2017-08-18T13:52:19.814Z</updated>
+  <updated>2017-08-18T14:04:03.637Z</updated>
   <id>JeanCHhhh.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="JeanCHhhh.github.io/2017/08/18/%E4%B8%8D%E5%90%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%AD%E7%9A%84this%E5%80%BC/"/>
     <id>JeanCHhhh.github.io/2017/08/18/不同上下文中的this值/</id>
     <published>2017-08-17T16:00:00.000Z</published>
-    <updated>2017-08-18T13:52:19.814Z</updated>
+    <updated>2017-08-18T14:04:03.637Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>注意：函数this的值，是在<strong>函数被调用</strong>时确定的，而不是在函数定义的时候。因为this的取值是执行上下文环境的一部分，而每一次调用函数，都会产生一个新的执行上下文环境。</p>
