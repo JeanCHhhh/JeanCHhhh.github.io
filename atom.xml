@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="JeanCHhhh.github.io/"/>
-  <updated>2017-08-18T13:42:18.346Z</updated>
+  <updated>2017-08-18T13:51:15.378Z</updated>
   <id>JeanCHhhh.github.io/</id>
   
   <author>
@@ -16,17 +16,17 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>不同上下文中的this值</title>
     <link href="JeanCHhhh.github.io/2017/08/18/%E4%B8%8D%E5%90%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%AD%E7%9A%84this%E5%80%BC/"/>
     <id>JeanCHhhh.github.io/2017/08/18/不同上下文中的this值/</id>
-    <published>2017-08-18T13:44:29.252Z</published>
-    <updated>2017-08-18T13:42:18.346Z</updated>
+    <published>2017-08-17T16:00:00.000Z</published>
+    <updated>2017-08-18T13:51:15.378Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
-<p>注意：函数this的值，是在<strong>函数被调用</strong>时确定的，而不是在函数定义的时候。<br>因为this的取值是执行上下文环境的一部分，而每一次调用函数，都会产生一个新的执行上下文环境。</p>
+<p>注意：函数this的值，是在<strong>函数被调用</strong>时确定的，而不是在函数定义的时候。因为this的取值是执行上下文环境的一部分，而每一次调用函数，都会产生一个新的执行上下文环境。</p>
 </blockquote>
 <p>因此不同上下文中的this值大致可以分为以下四种情况:</p>
-<h3 id="1-构造函数"><a href="#1-构造函数" class="headerlink" title="1. 构造函数"></a>1. 构造函数</h3><p>当函数作为构造函数被调用时，那么函数中的this就指向其构造的实例对象。<br><br><br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/8FliCf1GEf.png?imageslim" alt="example_1"></p>
+<h3 id="1-构造函数"><a href="#1-构造函数" class="headerlink" title="1. 构造函数"></a>1. 构造函数</h3><p>当函数作为构造函数被调用时，那么函数中的this就指向其构造的实例对象。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/8FliCf1GEf.png?imageslim" alt="example_1"></p>
 <blockquote>
 <p>注意：当构造函数不使用new操作符而是<strong>直接调用</strong>时，this的值是window。</p>
 </blockquote>
@@ -38,9 +38,9 @@
 </blockquote>
 <p><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/a582fKh823.png?imageslim" alt="example_4"><br><br>如上，方法fn赋值给了fn1。当执行函数fn1时，fn并没有作为obj的一个属性被调用，那么this的值就是window。</p>
 <hr>
-<h3 id="3-调用call-apply方法"><a href="#3-调用call-apply方法" class="headerlink" title="3. 调用call / apply方法"></a>3. 调用call / apply方法</h3><p>当一个函数调用了call或apply方法时，函数中this的值就改变为<strong>传入对象</strong>的值。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/ff6Hm83KIa.png?imageslim" alt="example_5"><br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/D0EF1iDe8i.png?imageslim" alt="example_6"><br></p>
+<h3 id="3-调用call-apply方法"><a href="#3-调用call-apply方法" class="headerlink" title="3. 调用call / apply方法"></a>3. 调用call / apply方法</h3><p>当一个函数调用了call或apply方法时，函数中this的值就改变为<strong>传入对象</strong>的值。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/ff6Hm83KIa.png?imageslim" alt="example_5"><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/D0EF1iDe8i.png?imageslim" alt="example_6"></p>
 <hr>
-<h3 id="4-全局环境-amp-调用普通函数"><a href="#4-全局环境-amp-调用普通函数" class="headerlink" title="4. 全局环境 &amp; 调用普通函数"></a>4. 全局环境 &amp; 调用普通函数</h3><p>首先在全局上下文中引用this时，很明显this指向window。<br><br><br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/5bJ1k3H357.png?imageslim" alt="example_7"><br><br><br><br>同样，普通函数在调用时，其中的this也指向window，如上面的例子。<br></p>
+<h3 id="4-全局环境-amp-调用普通函数"><a href="#4-全局环境-amp-调用普通函数" class="headerlink" title="4. 全局环境 &amp; 调用普通函数"></a>4. 全局环境 &amp; 调用普通函数</h3><p>首先在全局上下文中引用this时，很明显this指向window。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/5bJ1k3H357.png?imageslim" alt="example_7"><br><br>同样，普通函数在调用时，其中的this也指向window，如上面的例子。<br></p>
 <blockquote>
 <p>注意：如果一个函数嵌套在一个方法内，那么该函数仍然视为普通函数。在调用时，自然this的值还是window。<br></p>
 </blockquote>
@@ -50,39 +50,16 @@
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;注意：函数this的值，是在&lt;strong&gt;函数被调用&lt;/strong&gt;时确定的，而不是在函数定义的时候。&lt;br&gt;因为this的取值是执行上下文环境的一部分，而每一次调用函数，都会产生一个新的执行上下文环境。&lt;/p&gt;
+&lt;p&gt;注意：函数this的值，是在&lt;strong&gt;函数被调用&lt;/strong&gt;时确定的，而不是在函数定义的时候。因为this的取值是执行上下文环境的一部分，而每一次调用函数，都会产生一个新的执行上下文环境。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;
+&lt;p&gt;因此
     
     </summary>
     
+      <category term="JavaScript" scheme="JeanCHhhh.github.io/categories/JavaScript/"/>
     
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="JeanCHhhh.github.io/2017/07/30/hello-world/"/>
-    <id>JeanCHhhh.github.io/2017/07/30/hello-world/</id>
-    <published>2017-07-30T09:16:47.622Z</published>
-    <updated>2017-07-30T09:16:47.622Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
-    
-    </summary>
-    
+      <category term="学习笔记" scheme="JeanCHhhh.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
