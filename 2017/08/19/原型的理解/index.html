@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/ifmD3HcKEi.png?imageslim">
 <meta property="og:image" content="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/LicFH34gf9.png?imageslim">
 <meta property="og:image" content="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/9f5fG0Gf92.png?imageslim">
-<meta property="og:updated_time" content="2017-08-19T08:06:21.766Z">
+<meta property="og:updated_time" content="2017-08-19T08:09:13.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="原型的理解">
 <meta name="twitter:description" content="原型模式我们创建的每一个函数都有一个prototype属性，这个属性的值指向一个对象，这个对象的作用是包含可以由特定类型的所有实例共享的属性和方法。那么可以理解为：prototype指向的是调用构造函数所创建实例的原型对象。 同时，在默认情况下该原型对象只会获得一个constructor属性，指向prototype属性所在函数。而原型对象的其他方法都是从Object继承而来，这一点会在后面详述。当">
@@ -385,9 +385,9 @@
 </blockquote>
 <p><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/LicFH34gf9.png?imageslim" alt="mark"><br></p>
 <h5 id="构造函数的proto"><a href="#构造函数的proto" class="headerlink" title="构造函数的proto"></a>构造函数的<strong>proto</strong></h5><p>也就是说除了特例情况，所有对象都有 __proto__ ，而函数也是对象。我们通常创建函数是通过函数声明或函数表达式这两种方式。<br></p>
-<p><pre><br>// 函数声明<br>function sum (a, b) {<br>    return a+b;<br>}</pre></p>
+<p><pre>// 函数声明<br>function sum (a, b) {<br>    return a+b;<br>}</pre></p>
 <p>// 函数表达式<br>var sum = function (a, b) {<br>    return a+b;<br>}<br><br>而实际上还可以通过new Function创建。</p>
-<p><pre><br>var sum = new Function (“a”, “b”, “return a+b;”)<br></pre><br>所以下图中自定义构造函数 Foo 是由 Function 创建，其<strong>proto</strong>就指向了Function.prototype。同样的，构造函数Object以及构造函数Function也都是函数，都由Function创建，因此<strong>proto</strong>都是指向Function.prototype。<br></p>
+<p><pre>var sum = new Function (“a”, “b”, “return a+b;”)</pre><br>所以下图中自定义构造函数 Foo 是由 Function 创建，其<strong>proto</strong>就指向了Function.prototype。同样的，构造函数Object以及构造函数Function也都是函数，都由Function创建，因此<strong>proto</strong>都是指向Function.prototype。<br></p>
 <blockquote>
 <p>应注意：和前面提到的自定义构造函数的原型对象Foo.prototype一样的道理，Function.prototype的__proto同样指向的是Object.prototype。</p>
 </blockquote>

@@ -378,9 +378,9 @@
 </blockquote>
 <p><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/LicFH34gf9.png?imageslim" alt="mark"><br></p>
 <h5 id="构造函数的proto"><a href="#构造函数的proto" class="headerlink" title="构造函数的proto"></a>构造函数的<strong>proto</strong></h5><p>也就是说除了特例情况，所有对象都有 __proto__ ，而函数也是对象。我们通常创建函数是通过函数声明或函数表达式这两种方式。<br></p>
-<p><pre><br>// 函数声明<br>function sum (a, b) {<br>    return a+b;<br>}</pre></p>
+<p><pre>// 函数声明<br>function sum (a, b) {<br>    return a+b;<br>}</pre></p>
 <p>// 函数表达式<br>var sum = function (a, b) {<br>    return a+b;<br>}<br><br>而实际上还可以通过new Function创建。</p>
-<p><pre><br>var sum = new Function (“a”, “b”, “return a+b;”)<br></pre><br>所以下图中自定义构造函数 Foo 是由 Function 创建，其<strong>proto</strong>就指向了Function.prototype。同样的，构造函数Object以及构造函数Function也都是函数，都由Function创建，因此<strong>proto</strong>都是指向Function.prototype。<br></p>
+<p><pre>var sum = new Function (“a”, “b”, “return a+b;”)</pre><br>所以下图中自定义构造函数 Foo 是由 Function 创建，其<strong>proto</strong>就指向了Function.prototype。同样的，构造函数Object以及构造函数Function也都是函数，都由Function创建，因此<strong>proto</strong>都是指向Function.prototype。<br></p>
 <blockquote>
 <p>应注意：和前面提到的自定义构造函数的原型对象Foo.prototype一样的道理，Function.prototype的__proto同样指向的是Object.prototype。</p>
 </blockquote>
@@ -524,21 +524,21 @@
 <p>注意：函数this的值，是在<strong>函数被调用</strong>时确定的，而不是在函数定义的时候。因为this的取值是执行上下文环境的一部分，而每一次调用函数，都会产生一个新的执行上下文环境。</p>
 </blockquote>
 <p>因此不同上下文中的this值大致可以分为以下四种情况:</p>
-<h3 id="1-构造函数"><a href="#1-构造函数" class="headerlink" title="1. 构造函数"></a>1. 构造函数</h3><p>当函数作为构造函数被调用时，那么函数中的this就指向其构造的实例对象。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/8FliCf1GEf.png?imageslim" alt="example_1"></p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>当函数作为构造函数被调用时，那么函数中的this就指向其构造的实例对象。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/8FliCf1GEf.png?imageslim" alt="example_1"></p>
 <blockquote>
 <p>注意：当构造函数不使用new操作符而是<strong>直接调用</strong>时，this的值是window。</p>
 </blockquote>
 <p><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/agD6m6Je6F.png?imageslim" alt="example_2"></p>
 <hr>
-<h3 id="2-方法"><a href="#2-方法" class="headerlink" title="2. 方法"></a>2. 方法</h3><p>当函数作为一个对象的属性，即方法，被调用时，函数中的this指向改对象。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/EaAakLCdmE.png?imageslim" alt="example_3"></p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>当函数作为一个对象的属性，即方法，被调用时，函数中的this指向改对象。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/EaAakLCdmE.png?imageslim" alt="example_3"></p>
 <blockquote>
 <p>注意：当方法赋值给另一个变量时，其this的指向不再是原来的对象。</p>
 </blockquote>
 <p><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/a582fKh823.png?imageslim" alt="example_4"><br><br>如上，方法fn赋值给了fn1。当执行函数fn1时，fn并没有作为obj的一个属性被调用，那么this的值就是window。</p>
 <hr>
-<h3 id="3-调用call-apply方法"><a href="#3-调用call-apply方法" class="headerlink" title="3. 调用call / apply方法"></a>3. 调用call / apply方法</h3><p>当一个函数调用了call或apply方法时，函数中this的值就改变为<strong>传入对象</strong>的值。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/ff6Hm83KIa.png?imageslim" alt="example_5"><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/D0EF1iDe8i.png?imageslim" alt="example_6"></p>
+<h3 id="调用call-apply方法"><a href="#调用call-apply方法" class="headerlink" title="调用call / apply方法"></a>调用call / apply方法</h3><p>当一个函数调用了call或apply方法时，函数中this的值就改变为<strong>传入对象</strong>的值。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/ff6Hm83KIa.png?imageslim" alt="example_5"><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/D0EF1iDe8i.png?imageslim" alt="example_6"></p>
 <hr>
-<h3 id="4-全局环境-amp-调用普通函数"><a href="#4-全局环境-amp-调用普通函数" class="headerlink" title="4. 全局环境 &amp; 调用普通函数"></a>4. 全局环境 &amp; 调用普通函数</h3><p>首先在全局上下文中引用this时，很明显this指向window。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/5bJ1k3H357.png?imageslim" alt="example_7"><br><br>同样，普通函数在调用时，其中的this也指向window，如上面的例子。<br></p>
+<h3 id="全局环境-amp-调用普通函数"><a href="#全局环境-amp-调用普通函数" class="headerlink" title="全局环境 &amp; 调用普通函数"></a>全局环境 &amp; 调用普通函数</h3><p>首先在全局上下文中引用this时，很明显this指向window。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170818/5bJ1k3H357.png?imageslim" alt="example_7"><br><br>同样，普通函数在调用时，其中的this也指向window，如上面的例子。<br></p>
 <blockquote>
 <p>注意：如果一个函数嵌套在一个方法内，那么该函数仍然视为普通函数。在调用时，自然this的值还是window。<br></p>
 </blockquote>
