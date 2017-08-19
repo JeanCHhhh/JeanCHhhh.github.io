@@ -274,6 +274,162 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="JeanCHhhh.github.io/2017/08/19/原型的理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JeanCHhhh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="求知若饥， 虚心若愚">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/19/原型的理解/" itemprop="url">原型的理解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-19T00:00:00+08:00">
+                2017-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>我们创建的每一个函数都有一个<strong>prototype</strong>属性，这个属性的值指向一个<strong>对象</strong>，这个对象的作用是包含可以由特定类型的所有实例共享的<strong>属性和方法</strong>。那么可以理解为：prototype指向的是调用构造函数所创建实例的原型对象。<br></p>
+<p>同时，在默认情况下该原型对象只会获得一个<strong>constructor</strong>属性，指向<strong>prototype</strong>属性所在函数。而原型对象的其他方法都是从Object继承而来，这一点会在后面详述。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/D0Dhk93leh.png?imageslim" alt="mark"><br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/mBKjIHJ2kg.png?imageslim" alt="mark"><br><br>当使用构造函数创建实例对象时，该实例的内部会包含一个指针[[Prototype]]，可以通过<strong>proto</strong>属性访问。<br></p>
+<blockquote>
+<p>应注意：__proto__ 属性联系的是构造函数创建的<strong>实例</strong>与构造函数的<strong>原型对象</strong>之间的关系，即 person1.__proto__ === Person.prototype 。</p>
+</blockquote>
+<p><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/0GiLe1DB0B.png?imageslim" alt="mark"></p>
+<hr>
+<h3 id="隐式原型"><a href="#隐式原型" class="headerlink" title="隐式原型"></a>隐式原型</h3><h5 id="proto属性"><a href="#proto属性" class="headerlink" title="proto属性"></a><strong>proto</strong>属性</h5><p>上面提到了两种原型属性，其中<strong>每个函数</strong>都有 prototype 属性。而另一个 __proto__ 属性，可以称为隐式原型。我们可以通过控制台直接查看<strong>proto</strong>属性。<br><br> <img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/7LahD0jCjl.png?imageslim" alt="mark"><br><br>从上图我们可以发现 obj.__proto__ 和 Object.prototype 属性是一样。正如前面所说，obj 这个实例对象实际上是由 Object 函数创建的，因此 obj.__proto__ === Object.prototype 。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/ifmD3HcKEi.png?imageslim" alt="mark"><br></p>
+<h5 id="构造函数原型对象的proto"><a href="#构造函数原型对象的proto" class="headerlink" title="构造函数原型对象的proto"></a>构造函数原型对象的<strong>proto</strong></h5><p>前面提到了prototype指向的是一个对象，这个对象同样需要构造函数创建。所以构造函数的原型对象实际上也是由<strong>Object</strong>创建的，如下图，Foo.prototype的<strong>proto</strong>指向的是Object.prototype。这也就说明了为什么原型对象的其他方法是从Object继承而来的。<br></p>
+<blockquote>
+<p>应注意：虽然每个函数都有prototype属性，但并不是所有对象都有 __proto__ 属性。有一个特例：Object.prototype 的 __proto__ 指向 <strong>null</strong>。<br></p>
+</blockquote>
+<p><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/LicFH34gf9.png?imageslim" alt="mark"><br></p>
+<h5 id="构造函数的proto"><a href="#构造函数的proto" class="headerlink" title="构造函数的proto"></a>构造函数的<strong>proto</strong></h5><p>也就是说除了特例情况，所有对象都有 __proto__ ，而函数也是对象。我们通常创建函数是通过函数声明或函数表达式这两种方式。<br></p>
+<p><pre><br>// 函数声明<br>function sum (a, b) {<br>    return a+b;<br>}</pre></p>
+<p>// 函数表达式<br>var sum = function (a, b) {<br>    return a+b;<br>}<br><br>而实际上还可以通过new Function创建。</p>
+<p><pre><br>var sum = new Function (“a”, “b”, “return a+b;”)<br></pre><br>所以下图中自定义构造函数 Foo 是由 Function 创建，其<strong>proto</strong>就指向了Function.prototype。同样的，构造函数Object以及构造函数Function也都是函数，都由Function创建，因此<strong>proto</strong>都是指向Function.prototype。<br></p>
+<blockquote>
+<p>应注意：和前面提到的自定义构造函数的原型对象Foo.prototype一样的道理，Function.prototype的__proto同样指向的是Object.prototype。</p>
+</blockquote>
+<p><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/9f5fG0Gf92.png?imageslim" alt="mark"><br></p>
+<hr>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>JavaScript中的继承是通过原型链来体现的。当访问一个对象的属性时，现在该对象的基本属性中查找，如果没有再沿着<strong>proto</strong>这条链向上找。由上文可以知道，原型链是有限的，最终指向null。我们可以通过hasOwnProperty方法来判断属性是否是继承而来的。<br></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="JeanCHhhh.github.io/2017/08/18/不同上下文中的this值/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -467,7 +623,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
