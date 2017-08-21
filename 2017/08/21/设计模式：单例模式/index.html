@@ -93,26 +93,18 @@
 
 
 
-<meta name="description" content="原型模式我们创建的每一个函数都有一个prototype属性，这个属性的值指向一个对象，这个对象的作用是包含可以由特定类型的所有实例共享的属性和方法。那么可以理解为：prototype指向的是调用构造函数所创建实例的原型对象。 同时，在默认情况下该原型对象只会获得一个constructor属性，指向prototype属性所在函数。而原型对象的其他方法都是从Object继承而来，这一点会在后面详述。当">
+<meta name="description" content="定义在单例模式的核心结构中只包含一个称谓单例的特殊类。通过单例模式，保证一个类只有一个实例，并且在提供一个全局的接口。  基本实现用一个变量来标志当前是否已经为某个类创建过对象，如果是，则在下一次获取该类实例的时候，直接返回之前创建的对象。最简单的方式是通过创建对象字面量。  var Singleton = function() {     this.name = name;     this.i">
 <meta name="keywords" content="学习笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="原型的理解">
-<meta property="og:url" content="JeanCHhhh.github.io/2017/08/19/原型的理解/index.html">
+<meta property="og:title" content="设计模式：单例模式">
+<meta property="og:url" content="JeanCHhhh.github.io/2017/08/21/设计模式：单例模式/index.html">
 <meta property="og:site_name" content="求知若饥， 虚心若愚">
-<meta property="og:description" content="原型模式我们创建的每一个函数都有一个prototype属性，这个属性的值指向一个对象，这个对象的作用是包含可以由特定类型的所有实例共享的属性和方法。那么可以理解为：prototype指向的是调用构造函数所创建实例的原型对象。 同时，在默认情况下该原型对象只会获得一个constructor属性，指向prototype属性所在函数。而原型对象的其他方法都是从Object继承而来，这一点会在后面详述。当">
+<meta property="og:description" content="定义在单例模式的核心结构中只包含一个称谓单例的特殊类。通过单例模式，保证一个类只有一个实例，并且在提供一个全局的接口。  基本实现用一个变量来标志当前是否已经为某个类创建过对象，如果是，则在下一次获取该类实例的时候，直接返回之前创建的对象。最简单的方式是通过创建对象字面量。  var Singleton = function() {     this.name = name;     this.i">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/D0Dhk93leh.png?imageslim">
-<meta property="og:image" content="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/mBKjIHJ2kg.png?imageslim">
-<meta property="og:image" content="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/0GiLe1DB0B.png?imageslim">
-<meta property="og:image" content="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/7LahD0jCjl.png?imageslim">
-<meta property="og:image" content="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/ifmD3HcKEi.png?imageslim">
-<meta property="og:image" content="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/LicFH34gf9.png?imageslim">
-<meta property="og:image" content="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/9f5fG0Gf92.png?imageslim">
-<meta property="og:updated_time" content="2017-08-19T08:09:13.467Z">
+<meta property="og:updated_time" content="2017-08-21T06:44:43.772Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="原型的理解">
-<meta name="twitter:description" content="原型模式我们创建的每一个函数都有一个prototype属性，这个属性的值指向一个对象，这个对象的作用是包含可以由特定类型的所有实例共享的属性和方法。那么可以理解为：prototype指向的是调用构造函数所创建实例的原型对象。 同时，在默认情况下该原型对象只会获得一个constructor属性，指向prototype属性所在函数。而原型对象的其他方法都是从Object继承而来，这一点会在后面详述。当">
-<meta name="twitter:image" content="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/D0Dhk93leh.png?imageslim">
+<meta name="twitter:title" content="设计模式：单例模式">
+<meta name="twitter:description" content="定义在单例模式的核心结构中只包含一个称谓单例的特殊类。通过单例模式，保证一个类只有一个实例，并且在提供一个全局的接口。  基本实现用一个变量来标志当前是否已经为某个类创建过对象，如果是，则在下一次获取该类实例的时候，直接返回之前创建的对象。最简单的方式是通过创建对象字面量。  var Singleton = function() {     this.name = name;     this.i">
 
 
 
@@ -140,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="JeanCHhhh.github.io/2017/08/19/原型的理解/"/>
+  <link rel="canonical" href="JeanCHhhh.github.io/2017/08/21/设计模式：单例模式/"/>
 
 
 
 
 
-  <title>原型的理解 | 求知若饥， 虚心若愚</title>
+  <title>设计模式：单例模式 | 求知若饥， 虚心若愚</title>
   
 
 
@@ -285,7 +277,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="JeanCHhhh.github.io/2017/08/19/原型的理解/">
+    <link itemprop="mainEntityOfPage" href="JeanCHhhh.github.io/2017/08/21/设计模式：单例模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JeanCHhhh">
@@ -302,7 +294,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">原型的理解</h1>
+          <h1 class="post-title" itemprop="name headline">设计模式：单例模式</h1>
         
 
         <div class="post-meta">
@@ -314,8 +306,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-19T00:00:00+08:00">
-                2017-08-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-21T00:00:00+08:00">
+                2017-08-21
               </time>
             
 
@@ -371,30 +363,96 @@
       
 
       
-        <h3 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h3><p>我们创建的每一个函数都有一个<strong>prototype</strong>属性，这个属性的值指向一个<strong>对象</strong>，这个对象的作用是包含可以由特定类型的所有实例共享的<strong>属性和方法</strong>。那么可以理解为：prototype指向的是调用构造函数所创建实例的原型对象。<br></p>
-<p>同时，在默认情况下该原型对象只会获得一个<strong>constructor</strong>属性，指向<strong>prototype</strong>属性所在函数。而原型对象的其他方法都是从Object继承而来，这一点会在后面详述。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/D0Dhk93leh.png?imageslim" alt="mark"><br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/mBKjIHJ2kg.png?imageslim" alt="mark"><br><br>当使用构造函数创建实例对象时，该实例的内部会包含一个指针[[Prototype]]，可以通过<strong>proto</strong>属性访问。<br></p>
-<blockquote>
-<p>应注意：__proto__ 属性联系的是构造函数创建的<strong>实例</strong>与构造函数的<strong>原型对象</strong>之间的关系，即 person1.__proto__ === Person.prototype 。</p>
-</blockquote>
-<p><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/0GiLe1DB0B.png?imageslim" alt="mark"></p>
+        <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>在单例模式的核心结构中只包含一个称谓单例的特殊类。通过单例模式，保证<strong>一个类</strong>只有<strong>一个实例</strong>，并且在提供一个<strong>全局的接口</strong>。<br></p>
 <hr>
-<h3 id="隐式原型"><a href="#隐式原型" class="headerlink" title="隐式原型"></a>隐式原型</h3><h5 id="proto属性"><a href="#proto属性" class="headerlink" title="proto属性"></a><strong>proto</strong>属性</h5><p>上面提到了两种原型属性，其中<strong>每个函数</strong>都有 prototype 属性。而另一个 __proto__ 属性，可以称为隐式原型。我们可以通过控制台直接查看<strong>proto</strong>属性。<br><br> <img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/7LahD0jCjl.png?imageslim" alt="mark"><br><br>从上图我们可以发现 obj.__proto__ 和 Object.prototype 属性是一样。正如前面所说，obj 这个实例对象实际上是由 Object 函数创建的，因此 obj.__proto__ === Object.prototype 。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/ifmD3HcKEi.png?imageslim" alt="mark"><br></p>
-<h5 id="构造函数原型对象的proto"><a href="#构造函数原型对象的proto" class="headerlink" title="构造函数原型对象的proto"></a>构造函数原型对象的<strong>proto</strong></h5><p>前面提到了prototype指向的是一个对象，这个对象同样需要构造函数创建。所以构造函数的原型对象实际上也是由<strong>Object</strong>创建的，如下图，Foo.prototype的<strong>proto</strong>指向的是Object.prototype。这也就说明了为什么原型对象的其他方法是从Object继承而来的。<br></p>
-<blockquote>
-<p>应注意：虽然每个函数都有prototype属性，但并不是所有对象都有 __proto__ 属性。有一个特例：Object.prototype 的 __proto__ 指向 <strong>null</strong>。<br></p>
-</blockquote>
-<p><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/LicFH34gf9.png?imageslim" alt="mark"><br></p>
-<h5 id="构造函数的proto"><a href="#构造函数的proto" class="headerlink" title="构造函数的proto"></a>构造函数的<strong>proto</strong></h5><p>也就是说除了特例情况，所有对象都有 __proto__ ，而函数也是对象。我们通常创建函数是通过函数声明或函数表达式这两种方式。<br></p>
-<p><pre>// 函数声明<br>function sum (a, b) {<br>    return a+b;<br>}</pre></p>
-<p>// 函数表达式<br>var sum = function (a, b) {<br>    return a+b;<br>}<br><br>而实际上还可以通过new Function创建。</p>
-<p><pre>var sum = new Function (“a”, “b”, “return a+b;”)</pre><br>所以下图中自定义构造函数 Foo 是由 Function 创建，其<strong>proto</strong>就指向了Function.prototype。同样的，构造函数Object以及构造函数Function也都是函数，都由Function创建，因此<strong>proto</strong>都是指向Function.prototype。<br></p>
-<blockquote>
-<p>应注意：和前面提到的自定义构造函数的原型对象Foo.prototype一样的道理，Function.prototype的__proto同样指向的是Object.prototype。</p>
-</blockquote>
-<p><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/9f5fG0Gf92.png?imageslim" alt="mark"><br></p>
-<hr>
-<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>JavaScript中的继承是通过原型链来体现的。当访问一个对象的属性时，现在该对象的基本属性中查找，如果没有再沿着__proto__这条链向上找。由上文可以知道，原型链是有限的，最终指向null。我们可以通过hasOwnProperty方法来判断属性是否是继承而来的。<br></p>
+<h3 id="基本实现"><a href="#基本实现" class="headerlink" title="基本实现"></a>基本实现</h3><p>用一个变量来<strong>标志</strong>当前是否已经为某个类创建过对象，如果是，则在下一次获取该类实例的时候，直接返回之前创建的对象。最简单的方式是通过创建对象字面量。</p>
+<pre>
+var Singleton = function() {
+    this.name = name;
+    this.instance = null;
+};
 
+Singleton.getInstance = function(name) {
+    if (!this.instance) {
+        this.instance = new Singleton(name);
+    }
+    return this.instance;
+};
+
+var a = Singleton.getInstance('Jack');
+var b = Singleton.getInstance('John');
+
+console.log(a === b); // true
+</pre>
+
+<blockquote>
+<p>缺点：上述方法创建实例对象只能通过getIanstance函数；同时使用者必须知道这是个单例类，而不是通过以往的new方式来创建对象。</p>
+</blockquote>
+<hr>
+<h3 id="透明的实现方法"><a href="#透明的实现方法" class="headerlink" title="透明的实现方法"></a>透明的实现方法</h3><pre>
+var Singleton = (function() {
+    var instance;
+    var getInstance = function(name) {
+        var obj = new Object();
+        obj.name = name;
+        return obj;
+    }
+    var Singleton = function(name) {
+        if (!instance) {
+            instance = getInstance(name);
+        }
+        return instance;
+    }
+    return Singleton;
+})();
+
+var a = new Singleton('Jack');
+var b = new Singleton('John');
+
+console.log(a === b);
+</pre>
+实际上这样的单例模式构造函数**同时**负责了实例对象的**创建**、**初始化**以及保证**只有一个**实例对象。<br>
+
+> 缺点：有可能导致模块之间的强耦合。
+
+- - -
+### 惰性单例
+惰性单例是指只在需要的时候才创建实例对象。如文中一开始的例子，只在调用 **Singleton.getInstance** 的时候才创建 **instance**。在实际应用中，如果我们需要创建页面中唯一的iframe或script标签用于跨域请求数据，就可以通过惰性单例。<br>
+<pre>
+var CreateIframe = (function() {
+    var iframe;
+    return function() {
+        if(!iframe) {
+            iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+        }
+        return iframe;
+    };
+})();
+</pre>
+但是这样的实现方法**复用性**不高，如果需要创建的是script标签时，就要重新编写对象创建部分的代码。因此为实现方法的通用性，可以把管理单例的逻辑 (即保证实例对象的唯一) **抽离**出来。<br>
+<pre>
+// 保证唯一
+var Singleton = function(fn) {
+    var res;
+    return function() {
+        return res || (res = fn.apply(this, arguments));
+    };
+};
+
+// 创建、初始化
+var createSingleScript = Singleton(function() {
+    script = document.createElement('script');
+    script.style.display = 'none';
+    document.body.appendChild(script);
+});
+
+// 在需要请求数据的时候调用
+document.getElementById('btn-fetechData').onclick = function() {
+    var singleScript = creatSingleScript();
+};
+</pre>
       
     </div>
 
@@ -436,8 +494,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/18/不同上下文中的this值/" rel="next" title="不同上下文中的this值">
-                <i class="fa fa-chevron-left"></i> 不同上下文中的this值
+              <a href="/2017/08/19/原型的理解/" rel="next" title="原型的理解">
+                <i class="fa fa-chevron-left"></i> 原型的理解
               </a>
             
           </div>
@@ -445,10 +503,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/21/设计模式：单例模式/" rel="prev" title="设计模式：单例模式">
-                设计模式：单例模式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -578,7 +632,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#原型模式"><span class="nav-number">1.</span> <span class="nav-text">原型模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐式原型"><span class="nav-number">2.</span> <span class="nav-text">隐式原型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#proto属性"><span class="nav-number">2.0.1.</span> <span class="nav-text">proto属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造函数原型对象的proto"><span class="nav-number">2.0.2.</span> <span class="nav-text">构造函数原型对象的proto</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造函数的proto"><span class="nav-number">2.0.3.</span> <span class="nav-text">构造函数的proto</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承"><span class="nav-number">3.</span> <span class="nav-text">继承</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本实现"><span class="nav-number">2.</span> <span class="nav-text">基本实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#透明的实现方法"><span class="nav-number">3.</span> <span class="nav-text">透明的实现方法</span></a></li></ol></div>
             
 
           </div>
