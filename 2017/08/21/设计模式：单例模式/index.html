@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="求知若饥， 虚心若愚">
 <meta property="og:description" content="定义在单例模式的核心结构中只包含一个称谓单例的特殊类。通过单例模式，保证一个类只有一个实例，并且在提供一个全局的接口。  基本实现用一个变量来标志当前是否已经为某个类创建过对象，如果是，则在下一次获取该类实例的时候，直接返回之前创建的对象。最简单的方式是通过创建对象字面量。  var Singleton = function() {     this.name = name;     this.i">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-21T06:44:43.772Z">
+<meta property="og:updated_time" content="2017-08-26T05:39:51.971Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式：单例模式">
 <meta name="twitter:description" content="定义在单例模式的核心结构中只包含一个称谓单例的特殊类。通过单例模式，保证一个类只有一个实例，并且在提供一个全局的接口。  基本实现用一个变量来标志当前是否已经为某个类创建过对象，如果是，则在下一次获取该类实例的时候，直接返回之前创建的对象。最简单的方式是通过创建对象字面量。  var Singleton = function() {     this.name = name;     this.i">
@@ -411,9 +411,9 @@ var b = new Singleton('John');
 
 console.log(a === b);
 </pre>
-实际上这样的单例模式构造函数**同时**负责了实例对象的**创建**、**初始化**以及保证**只有一个**实例对象。<br>
+实际上这样的单例模式构造函数同时负责了实例对象的**创建、初始化以及保证只有一个实例对象**。<br>
 
-> 缺点：有可能导致模块之间的强耦合。
+>  缺点：有可能导致模块之间的强耦合。
 
 - - -
 ### 惰性单例
@@ -504,6 +504,10 @@ document.getElementById('btn-fetechData').onclick = function() {
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/08/26/数组的方法/" rel="prev" title="数组的方法">
+                数组的方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -575,7 +579,7 @@ document.getElementById('btn-fetechData').onclick = function() {
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

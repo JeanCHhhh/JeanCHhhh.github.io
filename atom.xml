@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="JeanCHhhh.github.io/"/>
-  <updated>2017-08-21T06:44:43.772Z</updated>
+  <updated>2017-08-26T05:37:40.137Z</updated>
   <id>JeanCHhhh.github.io/</id>
   
   <author>
@@ -16,11 +16,80 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>数组的方法</title>
+    <link href="JeanCHhhh.github.io/2017/08/26/%E6%95%B0%E7%BB%84%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+    <id>JeanCHhhh.github.io/2017/08/26/数组的方法/</id>
+    <published>2017-08-25T16:00:00.000Z</published>
+    <updated>2017-08-26T05:37:40.137Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="1-数组的检测方法"><a href="#1-数组的检测方法" class="headerlink" title="1. 数组的检测方法"></a>1. 数组的检测方法</h3><h5 id="ES5的isArray函数"><a href="#ES5的isArray函数" class="headerlink" title="ES5的isArray函数"></a>ES5的isArray函数</h5><pre>
+function isArray (obj) {
+    return Array.isArray(obj);
+};
+</pre>
+
+<blockquote>
+<p>缺点：<strong>IE8</strong>之前的版本并不支持该方法</p>
+</blockquote>
+<h5 id="对象自身的constructor属性"><a href="#对象自身的constructor属性" class="headerlink" title="对象自身的constructor属性"></a>对象自身的constructor属性</h5><pre>
+function isArray (obj) {
+    return (typeof obj !== 'undefined' && obj && obj.constructor === Array);
+};
+</pre>
+##### instanceof操作符
+instanceof操作符用于判断某个构造函数的**prototype**属性是否在另一个被检测对象的原型链上，即判断instanceof**前面的对象**是否是**后面的类或对象**的**实例**。
+<pre>
+arr instanceof Array
+</pre>
+
+<blockquote>
+<p>缺点：constructor和instanceof在多个frame中来回执行时，<strong>跨frame</strong>实例化的对象彼此间并<strong>不共享原型链</strong>，因此这两种方法会失效。</p>
+</blockquote>
+<h5 id="对象原生的toString方法"><a href="#对象原生的toString方法" class="headerlink" title="对象原生的toString方法"></a>对象原生的toString方法</h5><p>Object.prototype.toString的行为：取得对象一个内部属性[[Class]]，根据该属性返回形如“[object Array]”的字符串。因此可利用call访问到对象的内部属性[[Class]]，把类型检测转换为字符串的比较。</p>
+<p><pre><br>isArray = function (obj) {<br>    return Object.prototype.toString.call(obj) == “[object Array]”;<br>};<br></pre></p>
+<h5 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h5><p>通过判断是否是拥有join方法以及length长度属性的对象来检测数组</p>
+<p><pre><br>function isArray (arg) {<br>    if (typeof arg === “object” &amp;&amp;<br>       (“join” in arg &amp;&amp; typeof arg.join === “funciton”) &amp;&amp;<br>       (“length” in arg &amp;&amp; typeof arg.length === “number”)) {<br>        return true;<br>    }<br>};<br></pre></p>
+<h5 id="最佳检测方法"><a href="#最佳检测方法" class="headerlink" title="最佳检测方法"></a>最佳检测方法</h5><p>不管Array.isArray方法是否能够使用，都可以回到原生对象的toString检测方法上。</p>
+<p><pre><br>var isArray = (function () {<br>    if (Array.isArray) {<br>        return Array.isArray;<br>    }<br>    var objectToStringFn = Object.prototype.toString,<br>        arrayToStringResult = objectToStringFn.call([]);<br>    return function(subject) {<br>        return objectToStringFn.call(subjcet) === arrayToStringResult;<br>    };<br>}());<br></pre></p>
+<hr>
+<h3 id="2-数组的sort-方法"><a href="#2-数组的sort-方法" class="headerlink" title="2.数组的sort()方法"></a>2.数组的sort()方法</h3><h5 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h5><p>sort()方法对数组的元素进行排序，并<strong>返回原数组</strong>。默认情况下，没有传递参数时，对数组项进行升序排列。另外方法可接受一个比较函数compareFunction作为参数。<br></p>
+<ul>
+<li>compareFunction(a, b)返回值小于0：a &lt; b</li>
+<li>compareFunction(a, b)返回值等于0：a = b</li>
+<li>compareFunction(a, b)返回值大于0：a &gt; b<br><pre><br>// 升序排列<br>function ascSort(a, b) {<br>  if (a &lt; b) {<pre><code>return -1;
+</code></pre>  } else if (a &gt; b) {<pre><code>return 1;
+</code></pre>  } else {<pre><code>return 0;
+</code></pre>  }<br>};<br>// 降序排列<br>function descSort(a, b) {<br>  if (a &lt; b) {<pre><code>return -1;
+</code></pre>  } else if (a &gt; b) {<pre><code>return 1;
+</code></pre>  } else {<pre><code>return 0;
+</code></pre>  }<br>};<br></pre><h5 id="更简单的比较函数"><a href="#更简单的比较函数" class="headerlink" title="更简单的比较函数"></a>更简单的比较函数</h5>对于数字类型或valueof（）方法返回数字类型的对象类型，可使用更简单的比较函数。<br><pre><br>// 升序排列<br>function ascSort (a, b) {<br>  return a-b;<br>};</pre></li>
+</ul>
+<p>// 降序排列<br>function descSort （a, b）{<br>    return b-a;<br>};<br></p>
+<h5 id="对象数组的单属性排列"><a href="#对象数组的单属性排列" class="headerlink" title="对象数组的单属性排列"></a>对象数组的单属性排列</h5><p><pre><br>// 根据desc参数值，对数组按指定的property属性进行升降序排列<br>function objectSort (property, desc) {<br>    if (desc) {<br>        return function (a ,b) {<br>            return (a[property] &gt; b[property]) ? -1 : (a[property] &lt; b[property]) ? 1 : 0;<br>        }<br>    return function (a, b) {<br>        return (a[property] &lt; b[property]) ? -1 : (a[property] &gt; b[property]) ? 1 : 0;<br>    }<br>};<br></pre></p>
+<h5 id="对象数组的多属性排列"><a href="#对象数组的多属性排列" class="headerlink" title="对象数组的多属性排列"></a>对象数组的多属性排列</h5><p><pre><br>function dynamicSort(property) {<br>    var sortOrder = 1;<br>    if (property[0] === “-“) {<br>        sortOrder = -1;<br>        property = property.substr(1);<br>    }<br>    return funciton (a, b) {<br>        var result = (a[property] &lt; b[property]) ? -1 : (a[property] &gt; b[property]) ? 1 : 0;<br>        return result * sortOrder;<br>    }<br>};</pre></p>
+<p>function dynamicSortMultiple () {<br>    var props = arguments;<br>    return funciton (obj1, obj2) {<br>        var i=0, result=0, numberOfProperties = props.length;<br>        while (result === 0 &amp;&amp; i &lt; numberOfProperties) {<br>            result = dynamicSort(props[i])(obj1, obj2);<br>        }<br>        return result;<br>    }<br>};<br></p>
+<hr>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;1-数组的检测方法&quot;&gt;&lt;a href=&quot;#1-数组的检测方法&quot; class=&quot;headerlink&quot; title=&quot;1. 数组的检测方法&quot;&gt;&lt;/a&gt;1. 数组的检测方法&lt;/h3&gt;&lt;h5 id=&quot;ES5的isArray函数&quot;&gt;&lt;a href=&quot;#ES5的isArra
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="JeanCHhhh.github.io/categories/JavaScript/"/>
+    
+    
+      <category term="学习笔记" scheme="JeanCHhhh.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>设计模式：单例模式</title>
     <link href="JeanCHhhh.github.io/2017/08/21/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%9A%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
     <id>JeanCHhhh.github.io/2017/08/21/设计模式：单例模式/</id>
     <published>2017-08-20T16:00:00.000Z</published>
-    <updated>2017-08-21T06:44:43.772Z</updated>
+    <updated>2017-08-26T05:39:51.971Z</updated>
     
     <content type="html"><![CDATA[<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>在单例模式的核心结构中只包含一个称谓单例的特殊类。通过单例模式，保证<strong>一个类</strong>只有<strong>一个实例</strong>，并且在提供一个<strong>全局的接口</strong>。<br></p>
 <hr>
@@ -70,9 +139,9 @@ var b = new Singleton('John');
 
 console.log(a === b);
 </pre>
-实际上这样的单例模式构造函数**同时**负责了实例对象的**创建**、**初始化**以及保证**只有一个**实例对象。<br>
+实际上这样的单例模式构造函数同时负责了实例对象的**创建、初始化以及保证只有一个实例对象**。<br>
 
-> 缺点：有可能导致模块之间的强耦合。
+>  缺点：有可能导致模块之间的强耦合。
 
 - - -
 ### 惰性单例
