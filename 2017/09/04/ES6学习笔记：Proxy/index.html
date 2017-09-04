@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="求知若饥， 虚心若愚">
 <meta property="og:description" content="概述Proxy 用于修改某些操作的默认行为，可以理解成在目标对象之前增加一层“拦截”，外界对该对象的访问都必须通过这层拦截。因此 Proxy 提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 原意是代理，在ES6中的可由它来“代理”某些操作，所以可以译为“代理器”。 ES6原生提供Proxy构造函数，用来生成Proxy实例。  var proxy = new Proxy(target,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-04T13:34:51.742Z">
+<meta property="og:updated_time" content="2017-09-04T13:39:52.096Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6学习笔记：Proxy">
 <meta name="twitter:description" content="概述Proxy 用于修改某些操作的默认行为，可以理解成在目标对象之前增加一层“拦截”，外界对该对象的访问都必须通过这层拦截。因此 Proxy 提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 原意是代理，在ES6中的可由它来“代理”某些操作，所以可以译为“代理器”。 ES6原生提供Proxy构造函数，用来生成Proxy实例。  var proxy = new Proxy(target,">
@@ -364,11 +364,11 @@
 
       
         <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Proxy 用于修改某些操作的<strong>默认行为</strong>，可以理解成在目标对象之前增加一层“拦截”，外界对该对象的访问都必须通过这层拦截。因此 Proxy 提供了一种机制，可以对外界的访问进行<strong>过滤</strong>和<strong>改写</strong>。Proxy 原意是代理，在ES6中的可由它来“代理”某些操作，所以可以译为“代理器”。<br></p>
-<p>ES6原生提供Proxy构造函数，用来生成Proxy实例。</p>
+<p>ES6原生提供Proxy构造函数，用来生成Proxy实例。<br></p>
 <pre>
 var proxy = new Proxy(target, handler);
 </pre>
-Proxy 对象的所有用法都是上面这种形式，不同的只是 handler 参数的写法。其中 target 参数表示所要拦截的目标对象，handler 参数是用来设定拦截行为的**对象**。下面是一个简单的例子。
+Proxy 对象的所有用法都是上面这种形式，不同的只是 handler 参数的写法。其中 target 参数表示所要拦截的目标对象，handler 参数是用来设定拦截行为的**对象**。下面是一个简单的例子。<br>
 <pre>
 var proxy = new Proxy({}, {
     get: funciton(target, key) {
@@ -383,7 +383,7 @@ proxy.name // 'jean'
 proxy.name = 'jack';
 proxy.name // 'jack'
 </pre>
-以上代码对一个空对象架设了一层拦截，**重定义**了属性的读取（get）和设置（set）行为。Proxy 实际上**重载**了点运算符。
+以上代码对一个空对象架设了一层拦截，**重定义**了属性的读取（get）和设置（set）行为。Proxy 实际上**重载**了点运算符。<br>
 
 > 应注意：如果 handler 没有设置任何拦截行为，那就等同于直接通向原对象。
 
@@ -393,7 +393,7 @@ var proxy = new Proxy(target, {});
 proxy.name = 'jean';
 target.name // 'jean'
 </pre>
-Proxy 实例可以作为其他对象的**原型对象**。
+Proxy 实例可以作为其他对象的**原型对象**。<br>
 <pre>
 var proxy = new Proxy({}, {
     get: function(target, property) {
@@ -405,7 +405,7 @@ obj.name // 'jean'
 </pre>
 
 <hr>
-<h3 id="Proxy-实例方法"><a href="#Proxy-实例方法" class="headerlink" title="Proxy 实例方法"></a>Proxy 实例方法</h3><h4 id="get（）"><a href="#get（）" class="headerlink" title="get（）"></a>get（）</h4><p> get 方法用于拦截某个属性的<strong>读取操作</strong>。</p>
+<h3 id="Proxy-实例方法"><a href="#Proxy-实例方法" class="headerlink" title="Proxy 实例方法"></a>Proxy 实例方法</h3><h4 id="get（）"><a href="#get（）" class="headerlink" title="get（）"></a>get（）</h4><p> get 方法用于拦截某个属性的<strong>读取操作</strong>。<br></p>
 <pre>
 var person = {
     name: 'jean'
@@ -423,9 +423,9 @@ var proxy = new Proxy(preson, {
 proxy.name // 'jean'
 proxy.age // 抛出错误
 </pre>
-上面代码中，如果访问目标对象不存在的属性就会抛出一个错误告知该属性不存在。如果没有架设该拦截函数，访问不存在的属性，通常只会返回 **undefined**。
+上面代码中，如果访问目标对象不存在的属性就会抛出一个错误告知该属性不存在。如果没有架设该拦截函数，访问不存在的属性，通常只会返回 undefined。<br>
 ##### get 方法可以继承
-正如前面所说，Proxy 对象可以作为其他对象的原型，因此 get 方法可以**继承**给对象目标。
+正如前面所说，Proxy 对象可以作为其他对象的原型，因此 get 方法可以**继承**给对象目标。<br>
 <pre>
 var proxy = new Proxy({}, {
     get(target, property, receiver) {
@@ -438,7 +438,7 @@ var obj = Object.create(proxy);
 obj.name // 'get name'
 </pre>
 ##### 实现链式操作
-利用 Proxy，可以将读取属性的操作转变为**执行某个函数**，从而实现属性的链式操作。
+利用 Proxy，可以将读取属性的操作转变为**执行某个函数**，从而实现属性的链式操作。<br>
 <pre>
 var chain = (function () {
     return function (value) {
@@ -464,7 +464,7 @@ var pow = n => n*n;
 chain(2).double.pow.get; // 16
 </pre>
 ##### 生成 dom
-利用 get 拦截，可以实现以生成各种 DOM 节点的通用函数 createDom。
+利用 get 拦截，可以实现以生成各种 DOM 节点的通用函数 createDom。<br>
 <pre>
 const createDom = new Proxy({}, {
     get(target, property) {
@@ -489,8 +489,8 @@ const createDom = new Proxy({}, {
 <p>应注意：如果一个属性<strong>不可写</strong>并且<strong>不可配置</strong>，该属性<strong>不能被代理</strong>，通过 Proxy 对象访问该对象会报错。</p>
 </blockquote>
 <hr>
-<h3 id="set（）"><a href="#set（）" class="headerlink" title="set（）"></a>set（）</h3><p>set 方法用来拦截某个属性的<strong>赋值操作</strong>。</p>
-<h4 id="数据验证"><a href="#数据验证" class="headerlink" title="数据验证"></a>数据验证</h4><p>除了上面例子中利用 set 方法实现数据绑定，还可以利用 set 存值函数在对属性赋值的过程中进行数据验证。</p>
+<h3 id="set（）"><a href="#set（）" class="headerlink" title="set（）"></a>set（）</h3><p>set 方法用来拦截某个属性的<strong>赋值操作</strong>。<br></p>
+<h4 id="数据验证"><a href="#数据验证" class="headerlink" title="数据验证"></a>数据验证</h4><p>除了上面例子中利用 set 方法实现数据绑定，还可以利用 set 存值函数在对属性赋值的过程中进行数据验证。<br></p>
 <pre>
 let validator = {
     set(target, prop, value) {
@@ -513,7 +513,7 @@ person.age = 200 // 报错
 person.age = 'jean' // 报错
 </pre>
 ##### 设置内部属性
-通常我们把第一个字符为下划线的属性名定位对象的内部属性，以此来表示这些属性不应该被外部使用。结合 get 和 set 方法，可以实现内部属性**不被外部读写**。
+通常我们把第一个字符为下划线的属性名定位对象的内部属性，以此来表示这些属性不应该被外部使用。结合 get 和 set 方法，可以实现内部属性**不被外部读写**。<br>
 <pre>
 var handler = {
     get(target, key) {
