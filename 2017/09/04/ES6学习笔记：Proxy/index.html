@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="概述Proxy 用于修改某些操作的默认行为，可以理解成在目标对象之前增加一层“拦截”，外界对该对象的访问都必须通过这层拦截。因此 Proxy 提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 原意是代理，在ES6中的可由它来“代理”某些操作，所以可以译为“代理器”。 ES6原生提供Proxy构造函数，用来生成Proxy实例。  var proxy = new Proxy(target,">
+<meta name="description" content="概述Proxy 用于修改某些操作的默认行为，可以理解成在目标对象之前增加一层“拦截”，外界对该对象的访问都必须通过这层拦截。因此 Proxy 提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 原意是代理，在ES6中的可由它来“代理”某些操作，所以可以译为“代理器”。 ES6原生提供Proxy构造函数，用来生成Proxy实例。 1var proxy = new Proxy(target,">
 <meta name="keywords" content="学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6学习笔记：Proxy">
 <meta property="og:url" content="JeanCHhhh.github.io/2017/09/04/ES6学习笔记：Proxy/index.html">
 <meta property="og:site_name" content="求知若饥， 虚心若愚">
-<meta property="og:description" content="概述Proxy 用于修改某些操作的默认行为，可以理解成在目标对象之前增加一层“拦截”，外界对该对象的访问都必须通过这层拦截。因此 Proxy 提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 原意是代理，在ES6中的可由它来“代理”某些操作，所以可以译为“代理器”。 ES6原生提供Proxy构造函数，用来生成Proxy实例。  var proxy = new Proxy(target,">
+<meta property="og:description" content="概述Proxy 用于修改某些操作的默认行为，可以理解成在目标对象之前增加一层“拦截”，外界对该对象的访问都必须通过这层拦截。因此 Proxy 提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 原意是代理，在ES6中的可由它来“代理”某些操作，所以可以译为“代理器”。 ES6原生提供Proxy构造函数，用来生成Proxy实例。 1var proxy = new Proxy(target,">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-04T13:53:51.989Z">
+<meta property="og:updated_time" content="2017-09-04T14:14:27.872Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6学习笔记：Proxy">
-<meta name="twitter:description" content="概述Proxy 用于修改某些操作的默认行为，可以理解成在目标对象之前增加一层“拦截”，外界对该对象的访问都必须通过这层拦截。因此 Proxy 提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 原意是代理，在ES6中的可由它来“代理”某些操作，所以可以译为“代理器”。 ES6原生提供Proxy构造函数，用来生成Proxy实例。  var proxy = new Proxy(target,">
+<meta name="twitter:description" content="概述Proxy 用于修改某些操作的默认行为，可以理解成在目标对象之前增加一层“拦截”，外界对该对象的访问都必须通过这层拦截。因此 Proxy 提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 原意是代理，在ES6中的可由它来“代理”某些操作，所以可以译为“代理器”。 ES6原生提供Proxy构造函数，用来生成Proxy实例。 1var proxy = new Proxy(target,">
 
 
 
@@ -363,181 +363,28 @@
       
 
       
-        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Proxy 用于修改某些操作的<strong>默认行为</strong>，可以理解成在目标对象之前增加一层“拦截”，外界对该对象的访问都必须通过这层拦截。因此 Proxy 提供了一种机制，可以对外界的访问进行<strong>过滤</strong>和<strong>改写</strong>。Proxy 原意是代理，在ES6中的可由它来“代理”某些操作，所以可以译为“代理器”。<br></p>
-<p>ES6原生提供Proxy构造函数，用来生成Proxy实例。<br></p>
-<pre>
-var proxy = new Proxy(target, handler);
-</pre>
-Proxy 对象的所有用法都是上面这种形式，不同的只是 handler 参数的写法。其中 target 参数表示所要拦截的目标对象，handler 参数是用来设定拦截行为的**对象**。下面是一个简单的例子。<br>
-<pre>
-var proxy = new Proxy({}, {
-    get: funciton(target, key) {
-        return 'jean';
-    },
-    set: funciton(target, key, value) {
-        target[key] = value;
-    }
-});
-
-proxy.name // 'jean'
-proxy.name = 'jack';
-proxy.name // 'jack'
-</pre>
-以上代码对一个空对象架设了一层拦截，重定义了属性的读取（get）和设置（set）行为。Proxy 实际上**重载**了点运算符。<br>
-
-> 应注意：如果 handler 没有设置任何拦截行为，那就等同于直接通向原对象。
-
-<pre>
-var target = {};
-var proxy = new Proxy(target, {});
-proxy.name = 'jean';
-target.name // 'jean'
-</pre>
-Proxy 实例可以作为其他对象的**原型对象**。<br>
-<pre>
-var proxy = new Proxy({}, {
-    get: function(target, property) {
-        return 'jean';
-    }
-});
-var obj = Object.create(proxy);
-obj.name // 'jean'
-</pre>
-
-<hr>
-<h3 id="Proxy-实例方法"><a href="#Proxy-实例方法" class="headerlink" title="Proxy 实例方法"></a>Proxy 实例方法</h3><h4 id="get（）"><a href="#get（）" class="headerlink" title="get（）"></a>get（）</h4><p> get 方法用于拦截某个属性的<strong>读取操作</strong>。<br></p>
-<pre>
-var person = {
-    name: 'jean'
-};
-
-var proxy = new Proxy(preson, {
-    get: function(target, property) {
-        if (key in target) {
-            return target[key];
-        } else {
-            throw new ReferenceError("Property: " + property + " does not exist.");
-    }
-});
-
-proxy.name // 'jean'
-proxy.age // 抛出错误
-</pre>
-上面代码中，如果访问目标对象不存在的属性就会抛出一个错误告知该属性不存在。如果没有架设该拦截函数，访问不存在的属性，通常只会返回 undefined。<br>
-#### get 方法可以继承
-正如前面所说，Proxy 对象可以作为其他对象的原型，因此 get 方法可以**继承**给对象目标。<br>
-<pre>
-var proxy = new Proxy({}, {
-    get(target, property, receiver) {
-        console.log('get ' + property);
-        return target[property];
-    }
-});
-
-var obj = Object.create(proxy);
-obj.name // 'get name'
-</pre>
-#### 实现链式操作
-利用 Proxy，可以将读取属性的操作转变为执行某个函数，从而实现属性的链式操作。<br>
-<pre>
-var chain = (function () {
-    return function (value) {
-        var funList = [];
-        var proxy = new Proxy({}, {
-            get(chainObj, fnName) {
-                if (fnName === 'get') {
-                    return funList.reduce(function (val, fn) {
-                        return fn(val);
-                    },value);
-                }
-                funList.push(window[fnName]);
-                return proxy;
-            }
-        });
-        return proxy;
-    }
-}());
-
-var double = n => n*2;
-var pow = n => n*n;
-
-chain(2).double.pow.get; // 16
-</pre>
-#### 生成 dom
-利用 get 拦截，可以实现以生成各种 DOM 节点的通用函数 createDom。<br>
-<pre>
-const createDom = new Proxy({}, {
-    get(target, property) {
-        return function(attr = {}, ...children) {
-            const el = document.createElement(property);
-            for (let prop of Object,keys(attrs)) {
-                el.setAttribute(prop, attrs[prop]);
-            }
-            for (let child of children) {
-                if (typeof child === 'string') {
-                    child = document.createTextNode(child);
-                }
-                el.appendChild(child);
-            }
-            return el;
-        }
-    }
-});
-</pre>
-
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>Proxy 用于修改某些操作的默认行为，可以理解成在目标对象之前增加一层“拦截”，外界对该对象的访问都必须通过这层拦截。因此 Proxy 提供了一种机制，可以对外界的访问进行过滤和改写。Proxy 原意是代理，在ES6中的可由它来“代理”某些操作，所以可以译为“代理器”。<br></p>
+<p>ES6原生提供Proxy构造函数，用来生成Proxy实例。<br><br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</div></pre></td></tr></table></figure></p>
+<p>Proxy 对象的所有用法都是上面这种形式，不同的只是 handler 参数的写法。其中 target 参数表示所要拦截的目标对象，handler 参数是用来设定拦截行为的对象。下面是一个简单的例子。<br><br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, &#123;</div><div class="line">    get: funciton(target, key) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'jean'</span>;</div><div class="line">    &#125;,</div><div class="line">    set: funciton(target, key, value) &#123;</div><div class="line">        target[key] = value;</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">proxy.name <span class="comment">// 'jean'</span></div><div class="line">proxy.name = <span class="string">'jack'</span>;</div><div class="line">proxy.name <span class="comment">// 'jack'</span></div></pre></td></tr></table></figure></p>
+<p>以上代码对一个空对象架设了一层拦截，重定义了属性的读取（get）和设置（set）行为。Proxy 实际上重载了点运算符。<br></p>
 <blockquote>
-<p>应注意：如果一个属性<strong>不可写</strong>并且<strong>不可配置</strong>，该属性<strong>不能被代理</strong>，通过 Proxy 对象访问该对象会报错。</p>
+<p>应注意：如果 handler 没有设置任何拦截行为，那就等同于直接通向原对象。</p>
+</blockquote>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> target = &#123;&#125;;</div><div class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, &#123;&#125;);</div><div class="line">proxy.name = <span class="string">'jean'</span>;</div><div class="line">target.name <span class="comment">// 'jean'</span></div></pre></td></tr></table></figure>
+<p>Proxy 实例可以作为其他对象的原型对象。<br><br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, &#123;</div><div class="line">    get: <span class="function"><span class="keyword">function</span>(<span class="params">target, property</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'jean'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"><span class="keyword">var</span> obj = <span class="built_in">Object</span>.create(proxy);</div><div class="line">obj.name <span class="comment">// 'jean'</span></div></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="Proxy-实例方法"><a href="#Proxy-实例方法" class="headerlink" title="Proxy 实例方法"></a>Proxy 实例方法</h3><h4 id="get（）"><a href="#get（）" class="headerlink" title="get（）"></a>get（）</h4><p> get 方法用于拦截某个属性的读取操作。<br><br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> person = &#123;</div><div class="line">    name: <span class="string">'jean'</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(preson, &#123;</div><div class="line">    get: <span class="function"><span class="keyword">function</span>(<span class="params">target, property</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (key <span class="keyword">in</span> target) &#123;</div><div class="line">            <span class="keyword">return</span> target[key];</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">ReferenceError</span>(<span class="string">"Property: "</span> + property + <span class="string">" does not exist."</span>);</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">proxy.name <span class="comment">// 'jean'</span></div><div class="line">proxy.age <span class="comment">// 抛出错误</span></div></pre></td></tr></table></figure></p>
+<p>上面代码中，如果访问目标对象不存在的属性就会抛出一个错误告知该属性不存在。如果没有架设该拦截函数，访问不存在的属性，通常只会返回 undefined。<br></p>
+<h5 id="get-方法可以继承"><a href="#get-方法可以继承" class="headerlink" title="get 方法可以继承"></a>get 方法可以继承</h5><p>正如前面所说，Proxy 对象可以作为其他对象的原型，因此 get 方法可以继承给对象目标。<br><br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, &#123;</div><div class="line">    get(target, property, receiver) &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'get '</span> + property);</div><div class="line">        <span class="keyword">return</span> target[property];</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">var</span> obj = <span class="built_in">Object</span>.create(proxy);</div><div class="line">obj.name <span class="comment">// 'get name'</span></div></pre></td></tr></table></figure></p>
+<h4 id="实现链式操作"><a href="#实现链式操作" class="headerlink" title="实现链式操作"></a>实现链式操作</h4><p>利用 Proxy，可以将读取属性的操作转变为执行某个函数，从而实现属性的链式操作。<br><br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> chain = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> funList = [];</div><div class="line">        <span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, &#123;</div><div class="line">            get(chainObj, fnName) &#123;</div><div class="line">                <span class="keyword">if</span> (fnName === <span class="string">'get'</span>) &#123;</div><div class="line">                    <span class="keyword">return</span> funList.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">val, fn</span>) </span>&#123;</div><div class="line">                        <span class="keyword">return</span> fn(val);</div><div class="line">                    &#125;,value);</div><div class="line">                &#125;</div><div class="line">                funList.push(<span class="built_in">window</span>[fnName]);</div><div class="line">                <span class="keyword">return</span> proxy;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        <span class="keyword">return</span> proxy;</div><div class="line">    &#125;</div><div class="line">&#125;());</div><div class="line"></div><div class="line"><span class="keyword">var</span> double = <span class="function"><span class="params">n</span> =&gt;</span> n*<span class="number">2</span>;</div><div class="line"><span class="keyword">var</span> pow = <span class="function"><span class="params">n</span> =&gt;</span> n*n;</div><div class="line"></div><div class="line">chain(<span class="number">2</span>).double.pow.get; <span class="comment">// 16</span></div></pre></td></tr></table></figure></p>
+<h4 id="生成-dom"><a href="#生成-dom" class="headerlink" title="生成 dom"></a>生成 dom</h4><p>利用 get 拦截，可以实现以生成各种 DOM 节点的通用函数 createDom。<br><br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> createDom = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, &#123;</div><div class="line">    get(target, property) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">attr = &#123;&#125;, ...children</span>) </span>&#123;</div><div class="line">            <span class="keyword">const</span> el = <span class="built_in">document</span>.createElement(property);</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> prop <span class="keyword">of</span> <span class="built_in">Object</span>,keys(attrs)) &#123;</div><div class="line">                el.setAttribute(prop, attrs[prop]);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">let</span> child <span class="keyword">of</span> children) &#123;</div><div class="line">                <span class="keyword">if</span> (<span class="keyword">typeof</span> child === <span class="string">'string'</span>) &#123;</div><div class="line">                    child = <span class="built_in">document</span>.createTextNode(child);</div><div class="line">                &#125;</div><div class="line">                el.appendChild(child);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> el;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>应注意：如果一个属性不可写并且不可配置，该属性不能被代理，通过 Proxy 对象访问该对象会报错。</p>
 </blockquote>
 <hr>
-<h3 id="set（）"><a href="#set（）" class="headerlink" title="set（）"></a>set（）</h3><p>set 方法用来拦截某个属性的<strong>赋值操作</strong>。<br></p>
-<h4 id="数据验证"><a href="#数据验证" class="headerlink" title="数据验证"></a>数据验证</h4><p>除了上面例子中利用 set 方法实现数据绑定，还可以利用 set 存值函数在对属性赋值的过程中进行数据验证。<br></p>
-<pre>
-let validator = {
-    set(target, prop, value) {
-        if (prop === 'age') {
-            if (!Number.isInteger(value)) {
-                throw new TypeError('The age is not an integer');
-            }
-            if (value > 150) {
-                throw new RangeError('The age seems invalid');
-            }
-        }
-        target[prop] = value;
-    }
-};
-
-let person = new Proxy({}, validator);
-person.age = 24;
-person.age // 24
-person.age = 200 // 报错
-person.age = 'jean' // 报错
-</pre>
-#### 设置内部属性
-通常我们把第一个字符为下划线的属性名定位对象的内部属性，以此来表示这些属性不应该被外部使用。结合 get 和 set 方法，可以实现内部属性**不被外部读写**。<br>
-<pre>
-var handler = {
-    get(target, key) {
-        internal(key, 'get');
-        return target[key];
-    },
-    set(target, key, value) {
-        internal(key, 'set');
-        target[key] = value;
-        return true;
-    }
-};
-
-function internal (key, action) {
-    if (key[0] === '_') {
-        throw new Error(`Invalid attempt to ${action} private "${key}" property`);
-    }
-}
-
-var proxy = new Proxy({}, handler);
-proxy._name // 报错
-proxy._name = 'jean; // 报错
-</pre>
-
+<h3 id="set（）"><a href="#set（）" class="headerlink" title="set（）"></a>set（）</h3><p>set 方法用来拦截某个属性的赋值操作。<br></p>
+<h4 id="数据验证"><a href="#数据验证" class="headerlink" title="数据验证"></a>数据验证</h4><p>除了上面例子中利用 set 方法实现数据绑定，还可以利用 set 存值函数在对属性赋值的过程中进行数据验证。<br><br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> validator = &#123;</div><div class="line">    set(target, prop, value) &#123;</div><div class="line">        <span class="keyword">if</span> (prop === <span class="string">'age'</span>) &#123;</div><div class="line">            <span class="keyword">if</span> (!<span class="built_in">Number</span>.isInteger(value)) &#123;</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'The age is not an integer'</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (value &gt; <span class="number">150</span>) &#123;</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">RangeError</span>(<span class="string">'The age seems invalid'</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        target[prop] = value;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, validator);</div><div class="line">person.age = <span class="number">24</span>;</div><div class="line">person.age <span class="comment">// 24</span></div><div class="line">person.age = <span class="number">200</span> <span class="comment">// 报错</span></div><div class="line">person.age = <span class="string">'jean'</span> <span class="comment">// 报错</span></div></pre></td></tr></table></figure></p>
+<h4 id="设置内部属性"><a href="#设置内部属性" class="headerlink" title="设置内部属性"></a>设置内部属性</h4><p>通常我们把第一个字符为下划线的属性名定位对象的内部属性，以此来表示这些属性不应该被外部使用。结合 get 和 set 方法，可以实现内部属性不被外部读写。<br><br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> handler = &#123;</div><div class="line">    get(target, key) &#123;</div><div class="line">        internal(key, <span class="string">'get'</span>);</div><div class="line">        <span class="keyword">return</span> target[key];</div><div class="line">    &#125;,</div><div class="line">    set(target, key, value) &#123;</div><div class="line">        internal(key, <span class="string">'set'</span>);</div><div class="line">        target[key] = value;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">internal</span> (<span class="params">key, action</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (key[<span class="number">0</span>] === <span class="string">'_'</span>) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`Invalid attempt to <span class="subst">$&#123;action&#125;</span> private "<span class="subst">$&#123;key&#125;</span>" property`</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, handler);</div><div class="line">proxy._name <span class="comment">// 报错</span></div><div class="line">proxy._name = <span class="string">'jean; // 报错</span></div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>应注意：和 get 方法同样，如果目标对象的某个属性不可写也不可配置，那么 set 不能改变该属性，只能返回同样的值，否则会报错。</p>
 </blockquote>
@@ -721,7 +568,7 @@ proxy._name = 'jean; // 报错
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Proxy-实例方法"><span class="nav-number">2.</span> <span class="nav-text">Proxy 实例方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#get（）"><span class="nav-number">2.1.</span> <span class="nav-text">get（）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set（）"><span class="nav-number">3.</span> <span class="nav-text">set（）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据验证"><span class="nav-number">3.1.</span> <span class="nav-text">数据验证</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Proxy-实例方法"><span class="nav-number">2.</span> <span class="nav-text">Proxy 实例方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#get（）"><span class="nav-number">2.1.</span> <span class="nav-text">get（）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#get-方法可以继承"><span class="nav-number">2.1.1.</span> <span class="nav-text">get 方法可以继承</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现链式操作"><span class="nav-number">2.2.</span> <span class="nav-text">实现链式操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成-dom"><span class="nav-number">2.3.</span> <span class="nav-text">生成 dom</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set（）"><span class="nav-number">3.</span> <span class="nav-text">set（）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据验证"><span class="nav-number">3.1.</span> <span class="nav-text">数据验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置内部属性"><span class="nav-number">3.2.</span> <span class="nav-text">设置内部属性</span></a></li></ol></li></ol></div>
             
 
           </div>
