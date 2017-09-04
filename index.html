@@ -384,7 +384,7 @@ proxy.name // 'jean'
 proxy.name = 'jack';
 proxy.name // 'jack'
 </pre>
-以上代码对一个空对象架设了一层拦截，**重定义**了属性的读取（get）和设置（set）行为。Proxy 实际上**重载**了点运算符。<br>
+以上代码对一个空对象架设了一层拦截，重定义了属性的读取（get）和设置（set）行为。Proxy 实际上**重载**了点运算符。<br>
 
 > 应注意：如果 handler 没有设置任何拦截行为，那就等同于直接通向原对象。
 
@@ -425,7 +425,7 @@ proxy.name // 'jean'
 proxy.age // 抛出错误
 </pre>
 上面代码中，如果访问目标对象不存在的属性就会抛出一个错误告知该属性不存在。如果没有架设该拦截函数，访问不存在的属性，通常只会返回 undefined。<br>
-##### get 方法可以继承
+#### get 方法可以继承
 正如前面所说，Proxy 对象可以作为其他对象的原型，因此 get 方法可以**继承**给对象目标。<br>
 <pre>
 var proxy = new Proxy({}, {
@@ -438,8 +438,8 @@ var proxy = new Proxy({}, {
 var obj = Object.create(proxy);
 obj.name // 'get name'
 </pre>
-##### 实现链式操作
-利用 Proxy，可以将读取属性的操作转变为**执行某个函数**，从而实现属性的链式操作。<br>
+#### 实现链式操作
+利用 Proxy，可以将读取属性的操作转变为执行某个函数，从而实现属性的链式操作。<br>
 <pre>
 var chain = (function () {
     return function (value) {
@@ -464,7 +464,7 @@ var pow = n => n*n;
 
 chain(2).double.pow.get; // 16
 </pre>
-##### 生成 dom
+#### 生成 dom
 利用 get 拦截，可以实现以生成各种 DOM 节点的通用函数 createDom。<br>
 <pre>
 const createDom = new Proxy({}, {
@@ -513,7 +513,7 @@ person.age // 24
 person.age = 200 // 报错
 person.age = 'jean' // 报错
 </pre>
-##### 设置内部属性
+#### 设置内部属性
 通常我们把第一个字符为下划线的属性名定位对象的内部属性，以此来表示这些属性不应该被外部使用。结合 get 和 set 方法，可以实现内部属性**不被外部读写**。<br>
 <pre>
 var handler = {
