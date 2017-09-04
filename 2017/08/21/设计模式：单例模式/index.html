@@ -93,18 +93,18 @@
 
 
 
-<meta name="description" content="定义在单例模式的核心结构中只包含一个称谓单例的特殊类。通过单例模式，保证一个类只有一个实例，并且在提供一个全局的接口。  基本实现用一个变量来标志当前是否已经为某个类创建过对象，如果是，则在下一次获取该类实例的时候，直接返回之前创建的对象。最简单的方式是通过创建对象字面量。  var Singleton = function() {     this.name = name;     this.i">
+<meta name="description" content="定义在单例模式的核心结构中只包含一个称谓单例的特殊类。通过单例模式，保证一个类只有一个实例，并且在提供一个全局的接口。  基本实现用一个变量来标志当前是否已经为某个类创建过对象，如果是，则在下一次获取该类实例的时候，直接返回之前创建的对象。最简单的方式是通过创建对象字面量。12345678910111213141516var Singleton = function() &amp;#123;    thi">
 <meta name="keywords" content="学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式：单例模式">
 <meta property="og:url" content="JeanCHhhh.github.io/2017/08/21/设计模式：单例模式/index.html">
 <meta property="og:site_name" content="求知若饥， 虚心若愚">
-<meta property="og:description" content="定义在单例模式的核心结构中只包含一个称谓单例的特殊类。通过单例模式，保证一个类只有一个实例，并且在提供一个全局的接口。  基本实现用一个变量来标志当前是否已经为某个类创建过对象，如果是，则在下一次获取该类实例的时候，直接返回之前创建的对象。最简单的方式是通过创建对象字面量。  var Singleton = function() {     this.name = name;     this.i">
+<meta property="og:description" content="定义在单例模式的核心结构中只包含一个称谓单例的特殊类。通过单例模式，保证一个类只有一个实例，并且在提供一个全局的接口。  基本实现用一个变量来标志当前是否已经为某个类创建过对象，如果是，则在下一次获取该类实例的时候，直接返回之前创建的对象。最简单的方式是通过创建对象字面量。12345678910111213141516var Singleton = function() &amp;#123;    thi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-26T05:39:51.971Z">
+<meta property="og:updated_time" content="2017-09-04T14:22:05.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式：单例模式">
-<meta name="twitter:description" content="定义在单例模式的核心结构中只包含一个称谓单例的特殊类。通过单例模式，保证一个类只有一个实例，并且在提供一个全局的接口。  基本实现用一个变量来标志当前是否已经为某个类创建过对象，如果是，则在下一次获取该类实例的时候，直接返回之前创建的对象。最简单的方式是通过创建对象字面量。  var Singleton = function() {     this.name = name;     this.i">
+<meta name="twitter:description" content="定义在单例模式的核心结构中只包含一个称谓单例的特殊类。通过单例模式，保证一个类只有一个实例，并且在提供一个全局的接口。  基本实现用一个变量来标志当前是否已经为某个类创建过对象，如果是，则在下一次获取该类实例的时候，直接返回之前创建的对象。最简单的方式是通过创建对象字面量。12345678910111213141516var Singleton = function() &amp;#123;    thi">
 
 
 
@@ -365,94 +365,20 @@
       
         <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>在单例模式的核心结构中只包含一个称谓单例的特殊类。通过单例模式，保证<strong>一个类</strong>只有<strong>一个实例</strong>，并且在提供一个<strong>全局的接口</strong>。<br></p>
 <hr>
-<h3 id="基本实现"><a href="#基本实现" class="headerlink" title="基本实现"></a>基本实现</h3><p>用一个变量来<strong>标志</strong>当前是否已经为某个类创建过对象，如果是，则在下一次获取该类实例的时候，直接返回之前创建的对象。最简单的方式是通过创建对象字面量。</p>
-<pre>
-var Singleton = function() {
-    this.name = name;
-    this.instance = null;
-};
-
-Singleton.getInstance = function(name) {
-    if (!this.instance) {
-        this.instance = new Singleton(name);
-    }
-    return this.instance;
-};
-
-var a = Singleton.getInstance('Jack');
-var b = Singleton.getInstance('John');
-
-console.log(a === b); // true
-</pre>
-
+<h3 id="基本实现"><a href="#基本实现" class="headerlink" title="基本实现"></a>基本实现</h3><p>用一个变量来<strong>标志</strong>当前是否已经为某个类创建过对象，如果是，则在下一次获取该类实例的时候，直接返回之前创建的对象。最简单的方式是通过创建对象字面量。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Singleton = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">    <span class="keyword">this</span>.instance = <span class="literal">null</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Singleton.getInstance = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.instance) &#123;</div><div class="line">        <span class="keyword">this</span>.instance = <span class="keyword">new</span> Singleton(name);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.instance;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> a = Singleton.getInstance(<span class="string">'Jack'</span>);</div><div class="line"><span class="keyword">var</span> b = Singleton.getInstance(<span class="string">'John'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(a === b); <span class="comment">// true</span></div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>缺点：上述方法创建实例对象只能通过getIanstance函数；同时使用者必须知道这是个单例类，而不是通过以往的new方式来创建对象。</p>
 </blockquote>
 <hr>
-<h3 id="透明的实现方法"><a href="#透明的实现方法" class="headerlink" title="透明的实现方法"></a>透明的实现方法</h3><pre>
-var Singleton = (function() {
-    var instance;
-    var getInstance = function(name) {
-        var obj = new Object();
-        obj.name = name;
-        return obj;
-    }
-    var Singleton = function(name) {
-        if (!instance) {
-            instance = getInstance(name);
-        }
-        return instance;
-    }
-    return Singleton;
-})();
+<h3 id="透明的实现方法"><a href="#透明的实现方法" class="headerlink" title="透明的实现方法"></a>透明的实现方法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Singleton = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> instance;</div><div class="line">    <span class="keyword">var</span> getInstance = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">        obj.name = name;</div><div class="line">        <span class="keyword">return</span> obj;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> Singleton = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!instance) &#123;</div><div class="line">            instance = getInstance(name);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> instance;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> Singleton;</div><div class="line">&#125;)();</div><div class="line"></div><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Singleton(<span class="string">'Jack'</span>);</div><div class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> Singleton(<span class="string">'John'</span>);</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(a === b);</div></pre></td></tr></table></figure>
+<p>实际上这样的单例模式构造函数同时负责了实例对象的<strong>创建、初始化以及保证只有一个实例对象</strong>。</p>
+<blockquote>
+<p> 缺点：有可能导致模块之间的强耦合。</p>
+</blockquote>
+<hr>
+<h3 id="惰性单例"><a href="#惰性单例" class="headerlink" title="惰性单例"></a>惰性单例</h3><p>惰性单例是指只在需要的时候才创建实例对象。如文中一开始的例子，只在调用 <strong>Singleton.getInstance</strong> 的时候才创建 <strong>instance</strong>。在实际应用中，如果我们需要创建页面中唯一的iframe或script标签用于跨域请求数据，就可以通过惰性单例。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> CreateIframe = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> iframe;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(!iframe) &#123;</div><div class="line">            iframe = <span class="built_in">document</span>.createElement(<span class="string">'iframe'</span>);</div><div class="line">            iframe.style.display = <span class="string">'none'</span>;</div><div class="line">            <span class="built_in">document</span>.body.appendChild(iframe);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> iframe;</div><div class="line">    &#125;;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure></p>
+<p>但是这样的实现方法<strong>复用性</strong>不高，如果需要创建的是script标签时，就要重新编写对象创建部分的代码。因此为实现方法的通用性，可以把管理单例的逻辑 (即保证实例对象的唯一) <strong>抽离</strong>出来。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 保证唯一</span></div><div class="line"><span class="keyword">var</span> Singleton = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> res;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> res || (res = fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>));</div><div class="line">    &#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 创建、初始化</span></div><div class="line"><span class="keyword">var</span> createSingleScript = Singleton(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">    script.style.display = <span class="string">'none'</span>;</div><div class="line">    <span class="built_in">document</span>.body.appendChild(script);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 在需要请求数据的时候调用</span></div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">'btn-fetechData'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> singleScript = creatSingleScript();</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 
-var a = new Singleton('Jack');
-var b = new Singleton('John');
-
-console.log(a === b);
-</pre>
-实际上这样的单例模式构造函数同时负责了实例对象的**创建、初始化以及保证只有一个实例对象**。<br>
-
->  缺点：有可能导致模块之间的强耦合。
-
-- - -
-### 惰性单例
-惰性单例是指只在需要的时候才创建实例对象。如文中一开始的例子，只在调用 **Singleton.getInstance** 的时候才创建 **instance**。在实际应用中，如果我们需要创建页面中唯一的iframe或script标签用于跨域请求数据，就可以通过惰性单例。<br>
-<pre>
-var CreateIframe = (function() {
-    var iframe;
-    return function() {
-        if(!iframe) {
-            iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-        }
-        return iframe;
-    };
-})();
-</pre>
-但是这样的实现方法**复用性**不高，如果需要创建的是script标签时，就要重新编写对象创建部分的代码。因此为实现方法的通用性，可以把管理单例的逻辑 (即保证实例对象的唯一) **抽离**出来。<br>
-<pre>
-// 保证唯一
-var Singleton = function(fn) {
-    var res;
-    return function() {
-        return res || (res = fn.apply(this, arguments));
-    };
-};
-
-// 创建、初始化
-var createSingleScript = Singleton(function() {
-    script = document.createElement('script');
-    script.style.display = 'none';
-    document.body.appendChild(script);
-});
-
-// 在需要请求数据的时候调用
-document.getElementById('btn-fetechData').onclick = function() {
-    var singleScript = creatSingleScript();
-};
-</pre>
       
     </div>
 
@@ -636,7 +562,7 @@ document.getElementById('btn-fetechData').onclick = function() {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本实现"><span class="nav-number">2.</span> <span class="nav-text">基本实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#透明的实现方法"><span class="nav-number">3.</span> <span class="nav-text">透明的实现方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本实现"><span class="nav-number">2.</span> <span class="nav-text">基本实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#透明的实现方法"><span class="nav-number">3.</span> <span class="nav-text">透明的实现方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#惰性单例"><span class="nav-number">4.</span> <span class="nav-text">惰性单例</span></a></li></ol></div>
             
 
           </div>

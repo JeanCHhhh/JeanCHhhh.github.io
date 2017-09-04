@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/ifmD3HcKEi.png?imageslim">
 <meta property="og:image" content="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/LicFH34gf9.png?imageslim">
 <meta property="og:image" content="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/9f5fG0Gf92.png?imageslim">
-<meta property="og:updated_time" content="2017-08-19T08:09:13.467Z">
+<meta property="og:updated_time" content="2017-09-04T14:26:01.317Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="原型的理解">
 <meta name="twitter:description" content="原型模式我们创建的每一个函数都有一个prototype属性，这个属性的值指向一个对象，这个对象的作用是包含可以由特定类型的所有实例共享的属性和方法。那么可以理解为：prototype指向的是调用构造函数所创建实例的原型对象。 同时，在默认情况下该原型对象只会获得一个constructor属性，指向prototype属性所在函数。而原型对象的其他方法都是从Object继承而来，这一点会在后面详述。当">
@@ -378,16 +378,15 @@
 </blockquote>
 <p><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/0GiLe1DB0B.png?imageslim" alt="mark"></p>
 <hr>
-<h3 id="隐式原型"><a href="#隐式原型" class="headerlink" title="隐式原型"></a>隐式原型</h3><h5 id="proto属性"><a href="#proto属性" class="headerlink" title="proto属性"></a><strong>proto</strong>属性</h5><p>上面提到了两种原型属性，其中<strong>每个函数</strong>都有 prototype 属性。而另一个 __proto__ 属性，可以称为隐式原型。我们可以通过控制台直接查看<strong>proto</strong>属性。<br><br> <img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/7LahD0jCjl.png?imageslim" alt="mark"><br><br>从上图我们可以发现 obj.__proto__ 和 Object.prototype 属性是一样。正如前面所说，obj 这个实例对象实际上是由 Object 函数创建的，因此 obj.__proto__ === Object.prototype 。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/ifmD3HcKEi.png?imageslim" alt="mark"><br></p>
-<h5 id="构造函数原型对象的proto"><a href="#构造函数原型对象的proto" class="headerlink" title="构造函数原型对象的proto"></a>构造函数原型对象的<strong>proto</strong></h5><p>前面提到了prototype指向的是一个对象，这个对象同样需要构造函数创建。所以构造函数的原型对象实际上也是由<strong>Object</strong>创建的，如下图，Foo.prototype的<strong>proto</strong>指向的是Object.prototype。这也就说明了为什么原型对象的其他方法是从Object继承而来的。<br></p>
+<h3 id="隐式原型"><a href="#隐式原型" class="headerlink" title="隐式原型"></a>隐式原型</h3><h4 id="proto属性"><a href="#proto属性" class="headerlink" title="proto属性"></a><strong>proto</strong>属性</h4><p>上面提到了两种原型属性，其中<strong>每个函数</strong>都有 prototype 属性。而另一个 __proto__ 属性，可以称为隐式原型。我们可以通过控制台直接查看<strong>proto</strong>属性。<br><br> <img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/7LahD0jCjl.png?imageslim" alt="mark"><br><br>从上图我们可以发现 obj.__proto__ 和 Object.prototype 属性是一样。正如前面所说，obj 这个实例对象实际上是由 Object 函数创建的，因此 obj.__proto__ === Object.prototype 。<br><br><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/ifmD3HcKEi.png?imageslim" alt="mark"><br></p>
+<h4 id="构造函数原型对象的proto"><a href="#构造函数原型对象的proto" class="headerlink" title="构造函数原型对象的proto"></a>构造函数原型对象的<strong>proto</strong></h4><p>前面提到了prototype指向的是一个对象，这个对象同样需要构造函数创建。所以构造函数的原型对象实际上也是由<strong>Object</strong>创建的，如下图，Foo.prototype的<strong>proto</strong>指向的是Object.prototype。这也就说明了为什么原型对象的其他方法是从Object继承而来的。<br></p>
 <blockquote>
 <p>应注意：虽然每个函数都有prototype属性，但并不是所有对象都有 __proto__ 属性。有一个特例：Object.prototype 的 __proto__ 指向 <strong>null</strong>。<br></p>
 </blockquote>
 <p><img src="http://ouvt9tvkb.bkt.clouddn.com/blog/170819/LicFH34gf9.png?imageslim" alt="mark"><br></p>
-<h5 id="构造函数的proto"><a href="#构造函数的proto" class="headerlink" title="构造函数的proto"></a>构造函数的<strong>proto</strong></h5><p>也就是说除了特例情况，所有对象都有 __proto__ ，而函数也是对象。我们通常创建函数是通过函数声明或函数表达式这两种方式。<br></p>
-<p><pre>// 函数声明<br>function sum (a, b) {<br>    return a+b;<br>}</pre></p>
-<p>// 函数表达式<br>var sum = function (a, b) {<br>    return a+b;<br>}<br><br>而实际上还可以通过new Function创建。</p>
-<p><pre>var sum = new Function (“a”, “b”, “return a+b;”)</pre><br>所以下图中自定义构造函数 Foo 是由 Function 创建，其<strong>proto</strong>就指向了Function.prototype。同样的，构造函数Object以及构造函数Function也都是函数，都由Function创建，因此<strong>proto</strong>都是指向Function.prototype。<br></p>
+<h4 id="构造函数的proto"><a href="#构造函数的proto" class="headerlink" title="构造函数的proto"></a>构造函数的<strong>proto</strong></h4><p>也就是说除了特例情况，所有对象都有 __proto__ ，而函数也是对象。我们通常创建函数是通过函数声明或函数表达式这两种方式。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 函数声明</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a+b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 函数表达式</span></div><div class="line"><span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a+b;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>而实际上还可以通过new Function创建。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> sum = <span class="keyword">new</span> <span class="built_in">Function</span> (<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"return a+b;"</span>)</div></pre></td></tr></table></figure></p>
+<p>所以下图中自定义构造函数 Foo 是由 Function 创建，其<strong>proto</strong>就指向了Function.prototype。同样的，构造函数Object以及构造函数Function也都是函数，都由Function创建，因此<strong>proto</strong>都是指向Function.prototype。<br></p>
 <blockquote>
 <p>应注意：和前面提到的自定义构造函数的原型对象Foo.prototype一样的道理，Function.prototype的__proto同样指向的是Object.prototype。</p>
 </blockquote>
@@ -578,7 +577,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#原型模式"><span class="nav-number">1.</span> <span class="nav-text">原型模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐式原型"><span class="nav-number">2.</span> <span class="nav-text">隐式原型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#proto属性"><span class="nav-number">2.0.1.</span> <span class="nav-text">proto属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造函数原型对象的proto"><span class="nav-number">2.0.2.</span> <span class="nav-text">构造函数原型对象的proto</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#构造函数的proto"><span class="nav-number">2.0.3.</span> <span class="nav-text">构造函数的proto</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承"><span class="nav-number">3.</span> <span class="nav-text">继承</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#原型模式"><span class="nav-number">1.</span> <span class="nav-text">原型模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐式原型"><span class="nav-number">2.</span> <span class="nav-text">隐式原型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#proto属性"><span class="nav-number">2.1.</span> <span class="nav-text">proto属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造函数原型对象的proto"><span class="nav-number">2.2.</span> <span class="nav-text">构造函数原型对象的proto</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造函数的proto"><span class="nav-number">2.3.</span> <span class="nav-text">构造函数的proto</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承"><span class="nav-number">3.</span> <span class="nav-text">继承</span></a></li></ol></div>
             
 
           </div>
